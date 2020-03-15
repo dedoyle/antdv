@@ -1,19 +1,25 @@
 <template>
   <div class="home">
     <a-button>按钮</a-button>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <a-pagination
+      showSizeChanger
+      :defaultCurrent="3"
+      :total="500"
+    />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  methods: {
+    getData() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(1)
+        }, 200)
+      })
+    }
   }
 }
 </script>

@@ -1,31 +1,17 @@
-# antdv
+- 兼容 ie 10
+- dll提取公共库文件，利用强缓存并加快打包速度
+- Gzip
+- 去除预加载
+- 开启 less
+- 统计图表
+- 优化 lodash 和 moment
+- 现代模式
+- 预渲染 prerender-spa-plugin
+- 拆包
+- 多入口
+- manifest 缓存
+- async-component
 
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-ant design vue 兼容 ie 10，按需加载等
+ant design vue
+- 组件按需加载等
+- 优化 icon.js，按需加载

@@ -1,12 +1,27 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <a-locale-provider :locale="zhCN">
+    <div id="app">
+      <div id="nav">
+        <router-link to="/">Home</router-link>|
+        <router-link to="/about">About</router-link>
+      </div>
+      <router-view />
     </div>
-    <router-view/>
-  </div>
+  </a-locale-provider>
 </template>
+<script>
+import zhCN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
+export default {
+  data() {
+    return {
+      zhCN
+    }
+  }
+}
+</script>
 
 <style lang="less">
 #app {
