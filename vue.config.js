@@ -22,7 +22,7 @@ module.exports = {
         test: /\.(js|html|json|css)$/,
         threshold: 10240,
         deleteOriginalAssets: false
-      })
+      }),
     ]
     if (IS_PROD) {
       plugins = plugins.concat([
@@ -92,6 +92,7 @@ module.exports = {
     return config
   },
   devServer: {
+    open: true,
     overlay: {
       warnings: true,
       errors: true

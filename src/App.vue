@@ -1,10 +1,6 @@
 <template>
   <a-locale-provider :locale="zhCN">
     <div id="app">
-      <div id="nav">
-        <router-link to="/">Home</router-link>|
-        <router-link to="/about">About</router-link>
-      </div>
       <router-view />
     </div>
   </a-locale-provider>
@@ -25,23 +21,31 @@ export default {
 
 <style lang="less">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+/* 整个滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+/* 滚动条中间的槽 */
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.06);
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.08);
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.page {
+  height: 100%;
+}
+.p24 {
+  padding: 24px;
 }
 </style>

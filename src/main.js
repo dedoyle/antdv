@@ -6,6 +6,7 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import './plugins/ant.js'
+import '@/common/scripts/globalRegister'
 
 Vue.config.productionTip = false
 

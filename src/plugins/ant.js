@@ -11,6 +11,7 @@ import {
   Dropdown,
   Form,
   Input,
+  List,
   Layout,
   message,
   Menu,
@@ -20,6 +21,8 @@ import {
   Popover,
   Row,
   Spin,
+  Skeleton,
+  Select,
   TreeSelect,
   Tabs,
   Tooltip,
@@ -46,6 +49,7 @@ Vue.use(Divider)
 Vue.use(Dropdown)
 Vue.use(Form)
 Vue.use(Input)
+Vue.use(List)
 Vue.use(Layout)
 Vue.use(Menu)
 Vue.use(Modal)
@@ -54,6 +58,8 @@ Vue.use(Popconfirm)
 Vue.use(Popover)
 Vue.use(Row)
 Vue.use(Spin)
+Vue.use(Skeleton)
+Vue.use(Select)
 Vue.use(TreeSelect)
 Vue.use(Tabs)
 Vue.use(Tooltip)
