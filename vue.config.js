@@ -16,8 +16,8 @@ module.exports = {
     }
   },
   transpileDependencies: ['strip-ansi', 'ismobilejs'],
-  configureWebpack(config) {
-    let plugins = [
+  configureWebpack() {
+    const plugins = [
       new CompressionPlugin({
         test: /\.(js|html|json|css)$/,
         threshold: 10240,
@@ -25,7 +25,12 @@ module.exports = {
       }),
     ]
     if (IS_PROD) {
-      plugins = plugins.concat([
+      plugins.push([
+        new CompressionPlugin({
+          test: /\.(js|html|json|css)$/,
+          threshold: 10240,
+          deleteOriginalAssets: false
+        }),
         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/),
         new LodashModuleReplacementPlugin(),
         new webpack.DllReferencePlugin({
@@ -49,7 +54,6 @@ module.exports = {
   },
   chainWebpack(config) {
     config.resolve.alias
-      // .set('vue$', 'vue/dist/vue.esm.js')
       .set('lodash', 'lodash-es')
       .set('@ant-design/icons/lib/dist$', resolve('./src/plugins/icons.js'))
     // 防止多页面打包卡顿
