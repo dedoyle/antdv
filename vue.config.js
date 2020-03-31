@@ -5,9 +5,11 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const path = require('path')
 const resolve = url => path.resolve(__dirname, url)
 const IS_PROD = process.env.NODE_ENV === 'production'
+const IS_DEV = process.env.NODE_ENV === 'development'
 
 module.exports = {
   productionSourceMap: false,
+  filenameHashing: !IS_DEV,
   css: {
     loaderOptions: {
       less: {
@@ -22,7 +24,7 @@ module.exports = {
         test: /\.(js|html|json|css)$/,
         threshold: 10240,
         deleteOriginalAssets: false
-      }),
+      })
     ]
     if (IS_PROD) {
       plugins.push([
