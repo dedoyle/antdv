@@ -1,8 +1,8 @@
+const path = require('path')
 const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const path = require('path')
 const resolve = url => path.resolve(__dirname, url)
 const IS_PROD = process.env.NODE_ENV === 'production'
 const IS_DEV = process.env.NODE_ENV === 'development'
@@ -19,13 +19,7 @@ module.exports = {
   },
   transpileDependencies: ['strip-ansi', 'ismobilejs'],
   configureWebpack() {
-    const plugins = [
-      new CompressionPlugin({
-        test: /\.(js|html|json|css)$/,
-        threshold: 10240,
-        deleteOriginalAssets: false
-      })
-    ]
+    const plugins = []
     if (IS_PROD) {
       plugins.push([
         new CompressionPlugin({
