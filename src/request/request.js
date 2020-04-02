@@ -52,9 +52,9 @@ service.interceptors.request.use(
 
     config.method === 'get' && config.params && (config.params._r = Date.now())
 
-    let token = store.getters['login/token']
+    const token = store.getters['login/token']
     if (token) {
-      config.headers['Authorization'] = 'Bearer ' + token
+      config.headers.Authorization = 'Bearer ' + token
     }
 
     return config
@@ -74,14 +74,14 @@ service.interceptors.response.use(
       message.error(res[retMsgKey])
     } else {
       !response.config.isHideMessage && message.error(res[retMsgKey])
-      let errObj = response.config.needCode ? res : res[retMsgKey]
+      const errObj = response.config.needCode ? res : res[retMsgKey]
       return Promise.reject(errObj)
     }
   },
   error => {
-    let res = error.response
+    const res = error.response
     if (res) {
-      let statusCode = res.status
+      const statusCode = res.status
       let msg = ''
       if (statusCode && typeof statusCode === 'number') {
         if (statusCode === 401 || statusCode === 403) {

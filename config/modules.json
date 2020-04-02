@@ -1,0 +1,18 @@
+{
+  "common": {
+    "pages": {
+      "index": {
+        "entry": "src/modules/common/main.js",
+        "template": "public/index.html"
+      }
+    },
+    "devServer": {
+      "port": 8080,
+      "open": true,
+      "overlay": {
+        "warnings": true,
+        "errors": true
+      }
+    }
+  }
+}

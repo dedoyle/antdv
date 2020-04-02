@@ -12,7 +12,7 @@
 export default {
   name: 'LocalLoading',
   props: ['tip'],
-  data () {
+  data() {
     return {}
   }
 }

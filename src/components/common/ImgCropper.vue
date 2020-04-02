@@ -133,7 +133,7 @@ export default {
       var imgtype = ''
       var base64String = ''
       if (base64Arr.length > 1) {
-        //如果是图片base64，去掉头信息
+        // 如果是图片base64，去掉头信息
         base64String = base64Arr[1]
         imgtype = base64Arr[0].substring(
           base64Arr[0].indexOf(':') + 1,
@@ -142,7 +142,7 @@ export default {
       }
       // 将base64解码
       var bytes = atob(base64String)
-      //var bytes = base64;
+      // var bytes = base64;
       var bytesCode = new ArrayBuffer(bytes.length)
       // 转换为类型化数组
       var byteArray = new Uint8Array(bytesCode)
@@ -162,7 +162,7 @@ export default {
         this.$refs.cropper.getCropBlob(data => {
           this.filename = this.filename || `${Date.now()}-avatar.jpeg`
 
-          let formData = new FormData()
+          const formData = new FormData()
           formData.append(
             'file',
             this.convertBase64ToBlob(data),

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 import Layout from '@/components/Global/Layouts/Default/Layout.vue'
-import LoadData from '@/views/Global/LoadData/LoadData'
+import LoadData from '../views/LoadData'
 import onUnauthorized from '@/common/scripts/onUnauthorized.js'
 
 Vue.use(VueRouter)
@@ -14,14 +14,14 @@ const router = new VueRouter({
       name: 'Root',
       component: Layout,
       meta: {
-        text: '黑龙江基础教育综合平台'
+        text: '首页'
       }
     },
     {
       path: '/login/:redirect?',
       name: 'Login',
       component: resolve =>
-        require(['@/views/Global/Login/Login.vue'], resolve),
+        require(['../views/Login.vue'], resolve),
       meta: {
         text: '登录'
       },
@@ -31,7 +31,7 @@ const router = new VueRouter({
       path: '/forget-pwd/:redirect?',
       name: 'ForgetPwd',
       component: resolve => {
-        return require(['@/views/Global/Login/ForgetPwd.vue'], resolve)
+        return require(['../views/ForgetPwd.vue'], resolve)
       },
       props: true,
       meta: {
@@ -85,7 +85,7 @@ const checkAppPermission = to => {
   return true
 }
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   to.meta.text && (document.title = to.meta.text)
 
   if (store.getters['login/token']) {
@@ -95,17 +95,17 @@ router.beforeEach(async (to, from, next) => {
     }
 
     let isValid = to.meta.permission && checkPermission(to.meta.permission)
-    if(isValid === false) return false 
+    if (isValid === false) return false
 
     isValid = to.name !== 'LoadData' && checkInitData(next)
-    if(isValid === false) return false 
+    if (isValid === false) return false
 
     // 请求没做权限判断的情况下
     // 在前端只能直接根据应用 id 判断和跳转
     // 强制跳转至登录页，由于只会出现在切换角色账号登录的情况
     // 所以强制跳登录影响应该不大
     isValid = checkAppPermission(to)
-    if(isValid === false) return false 
+    if (isValid === false) return false
 
     next()
   } else {

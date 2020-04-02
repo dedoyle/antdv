@@ -3,13 +3,18 @@ const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const config = require('./config/modules.json')
+
 const resolve = url => path.resolve(__dirname, url)
 const IS_PROD = process.env.NODE_ENV === 'production'
-const IS_DEV = process.env.NODE_ENV === 'development'
+const MODULE_NAME = process.env.MODULE_NAME
+console.log(MODULE_NAME)
+console.log(config[MODULE_NAME])
 
 module.exports = {
+  ...config[MODULE_NAME],
+  outputDir: `dist/${MODULE_NAME}`,
   productionSourceMap: false,
-  filenameHashing: !IS_DEV,
   css: {
     loaderOptions: {
       less: {
@@ -91,11 +96,4 @@ module.exports = {
     }
     return config
   },
-  devServer: {
-    open: true,
-    overlay: {
-      warnings: true,
-      errors: true
-    }
-  }
 }

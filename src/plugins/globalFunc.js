@@ -1,12 +1,8 @@
 import Vue from 'vue'
 import router from '@/router'
-import { debounce } from 'lodash-es'
-import jsCallClient from '@/common/scripts/jsCallClient'
-import onUnauthorized from '@/common/scripts/onUnauthorized.js'
 
 const clearToken = function() {
   this.$store.commit('login/SET_TOKEN', '')
-  jsCallClient({ func: 'setToken', params: { token: '' } })
 }
 
 const globalFunc = {
@@ -20,7 +16,6 @@ const globalFunc = {
       }
     }
 
-    Vue.prototype.$onUnauthorized = debounce(onUnauthorized, 300)
     Vue.prototype.$clearToken = clearToken
   }
 }

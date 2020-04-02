@@ -19,7 +19,7 @@ import currentAppMixin from '@/mixins/currentApp'
 export default {
   name: 'AppHeader',
   props: ['appId', 'menus', 'defaultSelectedKeys'],
-  mixins: [ currentAppMixin ],
+  mixins: [currentAppMixin],
   data() {
     return {}
   }

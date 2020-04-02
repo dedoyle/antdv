@@ -1,6 +1,3 @@
-// import rolesAndApps from '@/common/fakeData/rolesAndApps'
-// import userDetail from '@/common/fakeData/userDetail'
-
 export default {
   Login: {
     request: { url: '/sso/v1/app/auth', method: 'post' },
@@ -19,14 +16,30 @@ export default {
     mock: { success: {} }
   },
   CheckCaptcha: { request: { url: '/sso/v1/captchas/check', method: 'post' } },
-  ResetToken: {
-    request: { url: '/sso-token/v1/refresh', method: 'post' },
-    mock: { success: { token: '1584409060155' } }
-  },
   UserDetail: {
     request: {
       url: '/dt-ecampus/user/v1/service/account/user-detail',
       method: 'get'
+    },
+    mock: {
+      success: {
+        user: {
+          id: 'yiyangqianxi',
+          name: '易烊千玺',
+          avatar:
+            'http://n.sinaimg.cn/front/128/w2048h1280/20181117/nquR-hnyuqhh5970633.jpg'
+        },
+        apps: [
+          {
+            id: '2349820348dd',
+            name: '微课'
+          },
+          {
+            id: 'kcie89d88d8',
+            name: '作业'
+          }
+        ]
+      }
     }
   },
   UserUpdate: {
@@ -52,13 +65,6 @@ export default {
     request: { url: '/qr_code/api/v1/check', method: 'get' },
     mock: { error: '超时了' }
   },
-  SaveQuickApps: {
-    request: {
-      url: '/dt-ecampus/user/v1/service/account/save-personalized-apps',
-      method: 'post'
-    },
-    mock: { success: {}, error: '保存失败' }
-  },
   UploadFile: {
     request: { url: '/dt-ecampus/file/file/upload', method: 'post' },
     mock: {
@@ -75,14 +81,5 @@ export default {
       },
       error: {}
     }
-  },
-  InitRelation: {
-    request: {
-      url: '/dt-ecampus/content/v2/common/init-relations',
-      method: 'get'
-    }
-  },
-  TagList: {
-    request: { url: '/dt-ecampus/content/v1/common/tag-list', method: 'get' }
   }
 }

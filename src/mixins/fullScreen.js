@@ -21,7 +21,7 @@ export default {
       }
     },
     toggleEscEvent(isFullScreen) {
-      if(isFullScreen) {
+      if (isFullScreen) {
         document.addEventListener('keydown', this.escHandler)
       } else {
         document.removeEventListener('keydown', this.escHandler)

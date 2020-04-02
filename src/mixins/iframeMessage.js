@@ -1,12 +1,12 @@
 import store from '@/store'
 import { message } from 'ant-design-vue'
 export default {
-  mounted () {
+  mounted() {
     this.$nextTick(() => {
       window.addEventListener('message', this.handleMessage, false)
     })
   },
-  destroyed () {
+  destroyed() {
     // 注意移除监听！注意移除监听！注意移除监听！
     window.removeEventListener('message', this.handleMessage, false)
   },
@@ -19,11 +19,11 @@ export default {
       this.$router.push(params)
     },
     changePageState(params) {
-      let oldUrl = this.url
-      let strs = params.params.state.split('.')
+      const oldUrl = this.url
+      const strs = params.params.state.split('.')
       strs.unshift('#')
       // 注意params的顺序
-      for(let i in params.params.params) {
+      for (const i in params.params.params) {
         strs.push(params.params.params[i])
       }
       this.url = oldUrl + strs.join('/')

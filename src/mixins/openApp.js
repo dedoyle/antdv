@@ -12,20 +12,20 @@ export default {
       if (this.isCustom || item.display_status !== 'display') {
         return false
       }
-      let url = appUrlsMap[item.id].url
+      const url = appUrlsMap[item.id].url
       if (/^http[s]?:\/\//.test(url)) {
         if (this.client === 'pc') {
-          jsCallClient({func: 'openUrl', params: {url: item.target}})
+          jsCallClient({ func: 'openUrl', params: { url: item.target } })
         } else {
           window.open(url, item.target)
         }
-      } else if(url.indexOf('%appId:') > -1) {
-        let res = url.match(/%appId:(\w+)%/)
+      } else if (url.indexOf('%appId:') > -1) {
+        const res = url.match(/%appId:(\w+)%/)
         if (res) {
-          jsCallClient({func: 'pullUpApp', params: {appid: res[1]}})
+          jsCallClient({ func: 'pullUpApp', params: { appid: res[1] } })
         }
-      } else if(url.indexOf('%routerName:') > -1) {
-        let name = url.match(/%routerName:(\w+)%/)
+      } else if (url.indexOf('%routerName:') > -1) {
+        const name = url.match(/%routerName:(\w+)%/)
         if (name) {
           this.$router.push({
             name: name[1],
