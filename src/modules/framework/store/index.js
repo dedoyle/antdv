@@ -6,21 +6,21 @@ import { getFileName } from '@/common/scripts/utils.js'
 vue.use(vuex)
 
 const importAll = r => {
-  const modules = {}
-  r.keys().forEach(filename => {
-    const rConf = r(filename)
-    modules[getFileName(filename)] = rConf.default || rConf
-  })
-  return modules
+  return r.keys().reduce((acc, filePath) => {
+    const rConf = r(filePath)
+    const fileName = getFileName(filePath)
+    acc[fileName] = rConf.default || rConf
+    return acc
+  }, {})
 }
 
-const modules = importAll(require.context('@/store/modules', false, /\.js$/))
+const modules = importAll(require.context('./modules', false, /\.js$/))
 
 const store = new vuex.Store({
   modules: modules,
   plugins: [
     createPersistedState({
-      paths: []
+      paths: ['global', 'currentApp', 'init']
     })
   ]
 })

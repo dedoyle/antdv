@@ -1,13 +1,31 @@
 {
-  "common": {
+  "framework": {
     "pages": {
       "index": {
-        "entry": "src/modules/common/main.js",
-        "template": "public/index.html"
+        "entry": "src/modules/framework/main.js",
+        "template": "public/index.html",
+        "chunks": ["chunk-vendors", "chunk-common", "index"]
       }
     },
     "devServer": {
       "port": 8080,
+      "open": true,
+      "overlay": {
+        "warnings": true,
+        "errors": true
+      }
+    }
+  },
+  "demo": {
+    "pages": {
+      "index": {
+        "entry": "src/modules/demo/main.js",
+        "template": "public/index.html",
+        "chunks": ["chunk-vendors", "chunk-common", "index"]
+      }
+    },
+    "devServer": {
+      "port": 8081,
       "open": true,
       "overlay": {
         "warnings": true,

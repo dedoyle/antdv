@@ -17,7 +17,6 @@ const importAll = r => {
 const modules = importAll(require.context('./modules', false, /\.js$/))
 
 const store = new vuex.Store({
-  key: 'common',
   modules: modules,
   plugins: [
     createPersistedState({

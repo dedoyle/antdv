@@ -1,0 +1,452 @@
+{
+  "1581496900nkiaio": {
+    "role": "student",
+    "name": "校园动态",
+    "url": ""
+  },
+  "1581496901naeuuu": {
+    "role": "student",
+    "name": "校园公告",
+    "url": ""
+  },
+  "1581496903cnsalz": {
+    "role": "student",
+    "name": "课程表",
+    "url": ""
+  },
+  "1581496904whzoql": {
+    "role": "student",
+    "name": "班级动态",
+    "url": ""
+  },
+  "1581496905yimtml": {
+    "role": "student",
+    "name": "班级公告",
+    "url": ""
+  },
+  "1581496906hwkfgd": {
+    "role": "student",
+    "name": "班级成员",
+    "url": "%routerName:ClassMembers%"
+  },
+  "1581496907tprxrv": {
+    "role": "student",
+    "name": "我的老师",
+    "url": ""
+  },
+  "1581496909qztaht": {
+    "role": "student",
+    "name": "同步学习",
+    "url": "https://xd.adobe.com/view/8e43bb4f-3847-45d7-584d-4a085c50ee4b-f872/screen/d320e8d4-3704-48de-9974-17d2f99d1cd8/-3-?fullscreen"
+  },
+  "1581496910mlzwmf": {
+    "role": "student",
+    "name": "自主学习",
+    "url": "https://xd.adobe.com/view/8e43bb4f-3847-45d7-584d-4a085c50ee4b-f872/screen/26e4aa65-8179-4bfa-89b0-7688f4e59b36/-3-?fullscreen"
+  },
+  "1581496911fbugfb": {
+    "role": "student",
+    "name": "错题本",
+    "url": "https://xd.adobe.com/view/8e43bb4f-3847-45d7-584d-4a085c50ee4b-f872/screen/7e611df7-d8b3-47ef-88d6-7ff6ea42b8df/-?fullscreen"
+  },
+  "1581496912pokocq": {
+    "role": "student",
+    "name": "自主测评",
+    "url": "https://xd.adobe.com/view/8e43bb4f-3847-45d7-584d-4a085c50ee4b-f872/screen/fa5038ec-8022-4ab0-a9e6-fa8ccfeed784/-?fullscreen"
+  },
+  "1581496913vppeai": {
+    "role": "student",
+    "name": "问老师",
+    "url": "https://xd.adobe.com/view/8e43bb4f-3847-45d7-584d-4a085c50ee4b-f872/screen/75b9dec2-cbec-4013-804a-1282fc4b00f3/-3-?fullscreen"
+  },
+  "1581496915owrvsc": {
+    "role": "student",
+    "name": "微课资源",
+    "url": "%routerName:AllMicroLessons%"
+  },
+  "1581496916cpushq": {
+    "role": "student",
+    "name": "习题资源",
+    "url": ""
+  },
+  "1581496917viqmgw": {
+    "role": "student",
+    "name": "综合资源",
+    "url": "https://xd.adobe.com/view/8e43bb4f-3847-45d7-584d-4a085c50ee4b-f872/screen/60df6ada-7f14-459c-9418-665007b22973/-7-?fullscreen"
+  },
+  "1581496918rcrvzl": {
+    "role": "student",
+    "name": "我的资源",
+    "url": ""
+  },
+  "1581496920gxdyul": {
+    "role": "student",
+    "name": "过程记录",
+    "url": ""
+  },
+  "1581496921wwouet": {
+    "role": "student",
+    "name": "漏洞分析",
+    "url": ""
+  },
+  "1581496922yrhgeh": {
+    "role": "student",
+    "name": "结果记录",
+    "url": ""
+  },
+  "1581496923fgbxzv": {
+    "role": "student",
+    "name": "综合能力",
+    "url": ""
+  },
+  "1581496925dybqsa": {
+    "role": "teacher",
+    "name": "课程表",
+    "url": ""
+  },
+  "1581496926jrjlpv": {
+    "role": "teacher",
+    "name": "备课",
+    "url": "%appId:prepare_lessons%"
+  },
+  "1581496927rntwff": {
+    "role": "teacher",
+    "name": "授课",
+    "url": "%appId:teach_lessons%"
+  },
+  "1581496928tmqabb": {
+    "role": "teacher",
+    "name": "作业",
+    "url": "%routerName:Homework%"
+  },
+  "1581496929dusmcw": {
+    "role": "teacher",
+    "name": "答疑解惑",
+    "url": ""
+  },
+  "1581496930railxk": {
+    "role": "teacher",
+    "name": "教学计划",
+    "url": ""
+  },
+  "1581496931ekvpog": {
+    "role": "teacher",
+    "name": "教学反思",
+    "url": ""
+  },
+  "1581496932srqvty": {
+    "role": "teacher",
+    "name": "教学总结",
+    "url": ""
+  },
+  "1581496934hviplz": {
+    "role": "teacher",
+    "name": "我的班级",
+    "url": "%appId:manage_class%"
+  },
+  "1581496935tmlchd": {
+    "role": "teacher",
+    "name": "班级园地",
+    "url": ""
+  },
+  "1581496936dxgnho": {
+    "role": "teacher",
+    "name": "家校互通",
+    "url": ""
+  },
+  "1581496938naveeh": {
+    "role": "teacher",
+    "name": "教研活动",
+    "url": "https://xd.adobe.com/view/1451f3fe-0e38-4b32-5a56-1d0c0aa8d421-6260/?fullscreen"
+  },
+  "1581496939ejkqay": {
+    "role": "teacher",
+    "name": "课题研究",
+    "url": ""
+  },
+  "1581496940pgfmyw": {
+    "role": "teacher",
+    "name": "听课记录",
+    "url": ""
+  },
+  "1581496942oquwpe": {
+    "role": "teacher",
+    "name": "我的校园",
+    "url": ""
+  },
+  "1581496943goiyeg": {
+    "role": "teacher",
+    "name": "公文办理",
+    "url": ""
+  },
+  "1581496944nbiano": {
+    "role": "teacher",
+    "name": "会议管理",
+    "url": ""
+  },
+  "1581496945cquxuw": {
+    "role": "teacher",
+    "name": "文档管理",
+    "url": ""
+  },
+  "1581496947ghiryz": {
+    "role": "teacher",
+    "name": "推荐资源",
+    "url": ""
+  },
+  "1581496948aztohd": {
+    "role": "teacher",
+    "name": "学科资源",
+    "url": "%routerName:ResourceLib%"
+  },
+  "1581496949mugjei": {
+    "role": "teacher",
+    "name": "综合资源",
+    "url": ""
+  },
+  "1581496951cqfuge": {
+    "role": "teacher",
+    "name": "活动记录",
+    "url": ""
+  },
+  "1581496952xbufzj": {
+    "role": "teacher",
+    "name": "教学心得",
+    "url": ""
+  },
+  "1581496953ypgpuu": {
+    "role": "teacher",
+    "name": "教师成长",
+    "url": ""
+  },
+  "1581496864nbezvl": {
+    "role": "school_admin",
+    "name": "校园动态",
+    "url": ""
+  },
+  "1581496865jopqbp": {
+    "role": "school_admin",
+    "name": "校园公告",
+    "url": ""
+  },
+  "1581496866wuuitq": {
+    "role": "school_admin",
+    "name": "公文办理",
+    "url": ""
+  },
+  "1581496867nwfugg": {
+    "role": "school_admin",
+    "name": "邮件收发",
+    "url": ""
+  },
+  "1581496868vcxfky": {
+    "role": "school_admin",
+    "name": "会议管理",
+    "url": ""
+  },
+  "1581496869gzykga": {
+    "role": "school_admin",
+    "name": "文档管理",
+    "url": ""
+  },
+  "1581496871xdjydv": {
+    "role": "school_admin",
+    "name": "教材管理",
+    "url": ""
+  },
+  "1581496872itqacr": {
+    "role": "school_admin",
+    "name": "教研活动",
+    "url": "https://xd.adobe.com/view/1451f3fe-0e38-4b32-5a56-1d0c0aa8d421-6260/?fullscreen"
+  },
+  "1581496873zuqhgf": {
+    "role": "school_admin",
+    "name": "教学计划",
+    "url": ""
+  },
+  "1581496874lajmgj": {
+    "role": "school_admin",
+    "name": "课程表",
+    "url": "%routerName:Timetable%"
+  },
+  "1581496875jcnqto": {
+    "role": "school_admin",
+    "name": "学籍管理",
+    "url": ""
+  },
+  "1581496876qtjvsq": {
+    "role": "school_admin",
+    "name": "教师管理",
+    "url": ""
+  },
+  "1581496877eqywxn": {
+    "role": "school_admin",
+    "name": "考务管理",
+    "url": ""
+  },
+  "1581496878ldrhsq": {
+    "role": "school_admin",
+    "name": "咨询管理",
+    "url": ""
+  },
+  "1581496880ulkats": {
+    "role": "school_admin",
+    "name": "教学数据",
+    "url": "https://xd.adobe.com/view/258824ff-1d92-4873-4822-7ed2a455202a-53b9/?fullscreen"
+  },
+  "1581496881xgzagq": {
+    "role": "school_admin",
+    "name": "应用数据",
+    "url": ""
+  },
+  "1581496882eetseo": {
+    "role": "school_admin",
+    "name": "学生评价",
+    "url": ""
+  },
+  "1581496883zolhez": {
+    "role": "school_admin",
+    "name": "教师评价",
+    "url": ""
+  },
+  "1581496884xrqwfg": {
+    "role": "school_admin",
+    "name": "学校评价",
+    "url": ""
+  },
+  "1581496885tpottv": {
+    "role": "school_admin",
+    "name": "分析报表",
+    "url": ""
+  },
+  "1581496887bnkfhb": {
+    "role": "school_admin",
+    "name": "图书管理",
+    "url": ""
+  },
+  "1581496888ssrkxy": {
+    "role": "school_admin",
+    "name": "场地管理",
+    "url": ""
+  },
+  "1581496889sglqlh": {
+    "role": "school_admin",
+    "name": "设备管理",
+    "url": ""
+  },
+  "1581496890pshcdy": {
+    "role": "school_admin",
+    "name": "校产管理",
+    "url": ""
+  },
+  "1581496891mgqzsz": {
+    "role": "school_admin",
+    "name": "无形资产管理",
+    "url": ""
+  },
+  "1581496893mnhlpo": {
+    "role": "school_admin",
+    "name": "食宿管理",
+    "url": ""
+  },
+  "1581496894vnwsqw": {
+    "role": "school_admin",
+    "name": "医务室",
+    "url": ""
+  },
+  "1581496895cwyipu": {
+    "role": "school_admin",
+    "name": "用车记录",
+    "url": ""
+  },
+  "1581496897nmqdhs": {
+    "role": "school_admin",
+    "name": "安全教育",
+    "url": ""
+  },
+  "1581496898qsnytd": {
+    "role": "school_admin",
+    "name": "安全管理",
+    "url": ""
+  },
+  "1581496738lbzawx": {
+    "role": "parent",
+    "name": "校园动态",
+    "url": "https://xd.adobe.com/view/cb9c8e48-8a68-4f0e-7485-a82d797a78c4-bdad/screen/ec5a19d8-baa0-4576-962b-cbf1306100c6/4-1-1-/?fullscreen"
+  },
+  "1581496739auxdag": {
+    "role": "parent",
+    "name": "校园公告",
+    "url": ""
+  },
+  "1581496740nheikn": {
+    "role": "parent",
+    "name": "班级动态",
+    "url": ""
+  },
+  "1581496741wajcts": {
+    "role": "parent",
+    "name": "班级公告",
+    "url": ""
+  },
+  "1581496743zbxxod": {
+    "role": "parent",
+    "name": "课程表",
+    "url": ""
+  },
+  "1581496744fuzbks": {
+    "role": "parent",
+    "name": "问老师",
+    "url": ""
+  },
+  "1581496745wutkmm": {
+    "role": "parent",
+    "name": "班级群",
+    "url": ""
+  },
+  "1581496746dlycgh": {
+    "role": "parent",
+    "name": "请假申请",
+    "url": ""
+  },
+  "1581496747nbzmfn": {
+    "role": "parent",
+    "name": "好友列表",
+    "url": ""
+  },
+  "1581496749zfeuyf": {
+    "role": "parent",
+    "name": "学生书架",
+    "url": "https://xd.adobe.com/view/cb9c8e48-8a68-4f0e-7485-a82d797a78c4-bdad/screen/0f362eb7-b156-4dae-9409-b9fe91531a0c/-7-?fullscreen"
+  },
+  "1581496750ejnkte": {
+    "role": "parent",
+    "name": "家长书架",
+    "url": ""
+  },
+  "1581496751irdxsy": {
+    "role": "parent",
+    "name": "家长课堂",
+    "url": "https://xd.adobe.com/view/cb9c8e48-8a68-4f0e-7485-a82d797a78c4-bdad/screen/af399422-992c-4098-add9-ed6aee6a3f08/-?fullscreen"
+  },
+  "1581496753wmmmzd": {
+    "role": "parent",
+    "name": "在校记录",
+    "url": "https://xd.adobe.com/view/cb9c8e48-8a68-4f0e-7485-a82d797a78c4-bdad/screen/82c3ea61-e6ce-43a2-b437-cb65ec25eb1c/4-4-1-?fullscreen"
+  },
+  "1581496754cosspx": {
+    "role": "parent",
+    "name": "自学记录",
+    "url": "https://xd.adobe.com/view/cb9c8e48-8a68-4f0e-7485-a82d797a78c4-bdad/screen/ec5a19d8-baa0-4576-962b-cbf1306100c6/4-1-1-?fullscreen"
+  },
+  "1581496755msvggx": {
+    "role": "parent",
+    "name": "诊断分析",
+    "url": ""
+  },
+  "1581496756sljcmg": {
+    "role": "parent",
+    "name": "学习报告",
+    "url": ""
+  }
+}

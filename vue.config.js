@@ -8,8 +8,6 @@ const config = require('./config/modules.json')
 const resolve = url => path.resolve(__dirname, url)
 const IS_PROD = process.env.NODE_ENV === 'production'
 const MODULE_NAME = process.env.MODULE_NAME
-console.log(MODULE_NAME)
-console.log(config[MODULE_NAME])
 
 module.exports = {
   ...config[MODULE_NAME],

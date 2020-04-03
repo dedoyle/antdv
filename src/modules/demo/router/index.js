@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '@/store'
-import Layout from '@/components/Global/Layouts/Default/Layout.vue'
-import LoadData from '../views/LoadData'
-import onUnauthorized from '@/common/scripts/onUnauthorized.js'
+import store from '@/modules/framework/store'
+import Layout from '@/components/common/layouts/Default/Layout.vue'
+import LoadData from '../views/LoadData.vue'
+import onUnauthorized from '@/modules/framework/common/onUnauthorized.js'
 
 Vue.use(VueRouter)
 
@@ -41,16 +41,14 @@ const router = new VueRouter({
     {
       path: '/load-data',
       name: 'LoadData',
+      component: LoadData,
       meta: {
         text: '加载公共数据中'
       },
-      component: LoadData
     },
     {
       path: '*',
-      redirect: '/',
-      visible: true,
-      sort: 0
+      redirect: '/'
     }
   ]
 })
@@ -58,7 +56,8 @@ const router = new VueRouter({
 const checkPermission = permission => {
   const permissionList = store.getters['login/permissionList']
   if (permissionList && !permissionList.includes(permission)) {
-    onUnauthorized(false, '没有访问权限')
+    onUnauthorized(store, false, '没有访问权限')
+    console.log('没权限')
     return false
   }
   return true
@@ -66,6 +65,7 @@ const checkPermission = permission => {
 
 const checkInitData = next => {
   if (!store.getters['init/initData']) {
+    console.log('没初始化')
     next({ name: 'LoadData' })
     return false
   }
@@ -79,7 +79,8 @@ const checkAppPermission = to => {
     appIds.length > 0 &&
     !appIds.includes(to.params && to.params.appId)
   ) {
-    onUnauthorized(false, '没有访问权限')
+    console.log('不能进入该 app')
+    onUnauthorized(store, false, '没有访问权限')
     return false
   }
   return true
@@ -87,17 +88,19 @@ const checkAppPermission = to => {
 
 router.beforeEach(async(to, from, next) => {
   to.meta.text && (document.title = to.meta.text)
+  console.log(to.name)
 
   if (store.getters['login/token']) {
+    let isValid = true
     if (to.name === 'Login') {
       next({ name: 'Root' })
       return
     }
 
-    let isValid = to.meta.permission && checkPermission(to.meta.permission)
+    isValid = to.meta.permission && checkPermission(to.meta.permission)
     if (isValid === false) return false
 
-    isValid = to.name !== 'LoadData' && checkInitData(next)
+    to.name !== 'LoadData' && (isValid = checkInitData(next))
     if (isValid === false) return false
 
     // 请求没做权限判断的情况下
@@ -107,10 +110,12 @@ router.beforeEach(async(to, from, next) => {
     isValid = checkAppPermission(to)
     if (isValid === false) return false
 
-    next()
+    isValid !== false && console.log('进入路由')
+    isValid !== false && next()
   } else {
     const canGoIn = ['Login', 'Register', 'ForgetPwd'].includes(to.name)
-    next(canGoIn ? undefined : { name: 'Login', params: { redirect: to.path } })
+    console.log('can go in', canGoIn)
+    next(canGoIn ? undefined : { name: 'Login', params: { redirect: to.fullPath } })
   }
 })
 

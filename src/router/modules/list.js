@@ -1,15 +1,15 @@
 import Layout from '@/components/common/LayoutUpToDown.vue'
 
 export default {
-  path: '/list',
-  redirect: '/list/index',
+  path: '/userlist',
+  redirect: '/userlist/index',
   component: Layout,
   children: [
     {
-      path: '/list/index',
-      name: 'List',
+      path: '/userlist/index',
+      name: 'UserList',
       component: () =>
-        import(/* webpackChunkName: "list" */ '@/views/List/List.vue'),
+        import(/* webpackChunkName: "userlist" */ '@/views/UserList/UserList.vue'),
       meta: {
         text: '首页',
         keepAlive: true

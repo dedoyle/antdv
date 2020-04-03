@@ -1,22 +1,50 @@
 <template>
-  <a-layout class="platform" :class="[roleClass, fullScreenClass]">
-    <a-layout-header>
-      <Head
-        :sider-width="siderWidth"
-        :collapsed="collapsed"
-        :toggle-sider="toggleCollapsed" />
+  <a-layout class="page">
+    <a-layout-header class="header">
+      <div class="logo" />
+      <a-menu
+        theme="dark"
+        mode="horizontal"
+        :defaultSelectedKeys="['2']"
+        :style="{ lineHeight: '64px' }"
+      >
+        <a-menu-item key="1">nav 1</a-menu-item>
+        <a-menu-item key="2">nav 2</a-menu-item>
+        <a-menu-item key="3">nav 3</a-menu-item>
+      </a-menu>
     </a-layout-header>
     <a-layout>
-      <a-layout-sider
-        :trigger="null"
-        collapsible
-        :width="sider.width"
-        :collapsed-width="sider.collapsedWidth"
-        v-model="collapsed"
-      >
-        <SideBar :collapsed="collapsed" />
+      <a-layout-sider width="200" style="background: #fff">
+        <a-menu
+          mode="inline"
+          :defaultSelectedKeys="['1']"
+          :defaultOpenKeys="['sub1']"
+          :style="{ height: '100%', borderRight: 0 }"
+        >
+          <a-sub-menu key="sub1">
+            <span slot="title">subnav 1</span>
+            <a-menu-item key="1">option1</a-menu-item>
+            <a-menu-item key="2">option2</a-menu-item>
+            <a-menu-item key="3">option3</a-menu-item>
+            <a-menu-item key="4">option4</a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="sub2">
+            <span slot="title">subnav 2</span>
+            <a-menu-item key="5">option5</a-menu-item>
+            <a-menu-item key="6">option6</a-menu-item>
+            <a-menu-item key="7">option7</a-menu-item>
+            <a-menu-item key="8">option8</a-menu-item>
+          </a-sub-menu>
+          <a-sub-menu key="sub3">
+            <span slot="title">subnav 3</span>
+            <a-menu-item key="9">option9</a-menu-item>
+            <a-menu-item key="10">option10</a-menu-item>
+            <a-menu-item key="11">option11</a-menu-item>
+            <a-menu-item key="12">option12</a-menu-item>
+          </a-sub-menu>
+        </a-menu>
       </a-layout-sider>
-      <a-layout style="width: 0;">
+      <a-layout style="padding: 0 24px 24px;">
         <a-layout-content>
           <LayoutContent />
         </a-layout-content>
@@ -25,109 +53,29 @@
   </a-layout>
 </template>
 <script>
-import Head from '@/components/Global/Head/Head.vue'
-import SideBar from '@/components/Global/SideBar.vue'
-import LayoutContent from '@/components/Global/Layouts/LayoutContent.vue'
-import { mapGetters, mapActions } from 'vuex'
-
+import LayoutContent from '@/components/common/layouts/LayoutContent.vue'
 export default {
   name: 'Layout',
   components: {
-    Head,
-    SideBar,
     LayoutContent
   },
   data() {
-    return {
-      sider: {
-        width: 168,
-        collapsedWidth: 80
-      },
-      collapsed: true
-    }
+    return {}
   },
-  computed: {
-    ...mapGetters('global', ['role', 'client']),
-    ...mapGetters('home', ['apps']),
-    ...mapGetters('notCache', ['isFullScreen']),
-    roleClass() {
-      let obj = {
-        'role-teacher': false,
-        'role-student': false,
-        'role-parent': false,
-        'role-school_admin': false
-      }
-      obj['role-' + this.role] = true
-      return obj
-    },
-    fullScreenClass() {
-      return {
-        'full-screen': this.isFullScreen
-      }
-    },
-    siderWidth() {
-      return this.collapsed ? this.sider.collapsedWidth : this.sider.width
-    }
-  },
-  created() {
-    this.apps.length === 0 && this.getUserDetail({
-      params: {
-        client: this.client,
-        fields: 'user_id,name,avatar,mobile,email,school,teaching_info,classes,type_info,children',
-        children_fields: 'user_id,name,email,school,classes'
-      }
-      // config: {
-      //   mock: 'success'
-      // }
-    })
-  },
-  methods: {
-    ...mapActions('global', ['getUserDetail']),
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed
-    }
-  }
+  created() {},
+  methods: {}
 }
 </script>
 <style lang="less" scoped>
-.platform {
-  height: 100%;
-  & > .ant-layout {
-    padding-left: 80px;
-    transition: padding 0.3s;
-  }
-  .ant-layout-header {
-    padding: 0;
-    transition: height 0.3s;
-  }
-  .ant-layout-sider {
-    position: fixed;
-    top: 64px;
-    bottom: 0;
-    left: 0;
-    z-index: 800;
-    transition: z-index 0.1s;
-  }
-  .ant-layout-content {
-    height: 100%;
-    margin: 0px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    background: rgba(244, 246, 249, 1);
-  }
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
 }
-.full-screen {
-  & > .ant-layout {
-    padding-left: 0;
-  }
-  .ant-layout-header {
-    height: 0;
-    overflow: hidden;
-  }
-  .ant-layout-sider {
-    z-index: -3;
-    overflow: hidden;
-  }
+.ant-layout-content {
+  display: flex;
+  flex-direction: column;
 }
 </style>

@@ -1,20 +1,17 @@
 import axios from 'axios'
-import store from '@/store'
 import { message } from 'ant-design-vue'
 import {
   serviceTimeout,
   retStatusCodeKey,
   retDataKey,
   retMsgKey,
-  successStatusCodeValue,
-  redirectStatusCodeValue
+  successStatusCodeValue
 } from './config'
-import onUnauthorized from '@/common/scripts/onUnauthorized.js'
-import getApiServer from '@/common/scripts/getApiServer.js'
+import onUnauthorized from '@/modules/framework/common/onUnauthorized.js'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: getApiServer(), // api 的 base_url
+  baseURL: '/', // api 的 base_url
   timeout: serviceTimeout, // 请求超时时间
   withCredentials: false // 跨域
 })
@@ -52,7 +49,7 @@ service.interceptors.request.use(
 
     config.method === 'get' && config.params && (config.params._r = Date.now())
 
-    const token = store.getters['login/token']
+    const token = sessionStorage.getItem('token')
     if (token) {
       config.headers.Authorization = 'Bearer ' + token
     }
@@ -70,8 +67,6 @@ service.interceptors.response.use(
     const res = response[retDataKey]
     if (res[retStatusCodeKey] === successStatusCodeValue) {
       return Promise.resolve(res[retDataKey])
-    } else if (res[retStatusCodeKey] === redirectStatusCodeValue) {
-      message.error(res[retMsgKey])
     } else {
       !response.config.isHideMessage && message.error(res[retMsgKey])
       const errObj = response.config.needCode ? res : res[retMsgKey]

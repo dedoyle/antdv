@@ -1,4 +1,4 @@
-import service from '@/modules/common/request'
+import service from '@/modules/framework/request'
 
 export default {
   namespaced: true,

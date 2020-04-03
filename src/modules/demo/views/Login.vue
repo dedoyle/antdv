@@ -1,12 +1,13 @@
 <template>
   <div>
     Login
-    <a-button @click="login">登录</a-button>
+    <a-button @click="signIn">登录</a-button>
     <a-button @click="forgetPWd">忘记密码</a-button>
   </div>
 </template>
 <script>
-import service from '@/modules/common/request'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'Login',
   props: ['redirect'],
@@ -16,14 +17,15 @@ export default {
   computed: {},
   created() {},
   methods: {
-    login() {
-      return service.globalLogin({
+    ...mapActions('login', ['login']),
+    signIn() {
+      return this.login({
         config: {
           mock: 'success'
         }
       }).then(() => {
         this.$router.replace({
-          name: this.redirect || 'Root'
+          path: this.redirect || '/'
         })
       })
     },

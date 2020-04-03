@@ -1,10 +1,11 @@
 <template>
   <div class="layout-cnt">
     <iframe
-      :src="iframeSrc"
+      :src="appUrl"
       frameborder="0"
       width="100%"
-      height="100%"></iframe>
+      height="100%"
+      loading="lazy"></iframe>
     <!-- <keep-alive :exclude="excludeComponents">
       <router-view v-if="$route.meta.keepAlive"/>
     </keep-alive>
@@ -17,7 +18,9 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'LayoutContent',
   data() {
-    return {}
+    return {
+      appUrl: ''
+    }
   },
   computed: {
     ...mapGetters('keepAlive', ['excludeComponents']),
