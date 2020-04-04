@@ -7,7 +7,7 @@ import {
   retMsgKey,
   successStatusCodeValue
 } from './config'
-import onUnauthorized from '@/modules/framework/common/onUnauthorized.js'
+import onUnauthorized from '@index/common/onUnauthorized.js'
 
 // 创建axios实例
 const service = axios.create({
@@ -80,7 +80,7 @@ service.interceptors.response.use(
       let msg = ''
       if (statusCode && typeof statusCode === 'number') {
         if (statusCode === 401 || statusCode === 403) {
-          onUnauthorized(res.config.isHideMessage)
+          onUnauthorized(res.config.isHideMessage, '没有访问权限')
           return false
         } else if (statusCode >= 500) {
           msg = '服务器错误'

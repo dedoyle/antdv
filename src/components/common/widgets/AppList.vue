@@ -68,12 +68,12 @@ export default {
       if (!this.canCustom && !this.isCustom) {
         return type.name
       }
-      let checkedList = type.apps.filter(item => this.quickAppIds.indexOf(item.id) > -1)
-      let suffix = checkedList.length > 0 ? '(' + checkedList.length + ')' : ''
+      const checkedList = type.apps.filter(item => this.quickAppIds.indexOf(item.id) > -1)
+      const suffix = checkedList.length > 0 ? '(' + checkedList.length + ')' : ''
       return type.name + suffix
     },
     onChange($event, item) {
-      let appIds = Array.from(this.quickAppIds)
+      const appIds = Array.from(this.quickAppIds)
       if ($event.target.checked) {
         appIds.push(item.id)
       } else {

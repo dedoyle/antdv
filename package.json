@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dll": "webpack -p --progress --config ./webpack.dll.config.js",
-    "serve": "node build/buildByModule serve",
-    "build": "node build/buildByModule build",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "analyz": "vue-cli-service build --report --report-json",
     "test:unit": "vue-cli-service test:unit",
     "inspect": "vue-cli-service inspect",
@@ -50,6 +50,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.1.2",
+    "hard-source-webpack-plugin": "^0.13.1",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "lodash-webpack-plugin": "^0.11.5",

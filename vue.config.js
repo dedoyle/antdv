@@ -1,60 +1,57 @@
 const path = require('path')
 const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const config = require('./config/modules.json')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+const { generateEntries } = require('./mutiple-entry')
 
-const resolve = url => path.resolve(__dirname, url)
+const resolve = (dir) => path.resolve(__dirname, dir)
 const IS_PROD = process.env.NODE_ENV === 'production'
-const MODULE_NAME = process.env.MODULE_NAME
+
+const pages = generateEntries()
 
 module.exports = {
-  ...config[MODULE_NAME],
-  outputDir: `dist/${MODULE_NAME}`,
   productionSourceMap: false,
+  pages,
   css: {
     loaderOptions: {
       less: {
-        javascriptEnabled: true
-      }
-    }
+        javascriptEnabled: true,
+      },
+    },
+    extract: IS_PROD && {
+      moduleFilename: ({ name }) => {
+        return name === 'index'
+          ? 'css/[name].[contenthash:8].css'
+          : '[name]/[name].[contenthash:8].css'
+      },
+      chunkFilename: 'css/[name].[contenthash:8].css',
+    },
   },
   transpileDependencies: ['strip-ansi', 'ismobilejs'],
-  configureWebpack() {
-    const plugins = []
+  configureWebpack: config => {
     if (IS_PROD) {
-      plugins.push([
+      const plugins = [
         new CompressionPlugin({
           test: /\.(js|html|json|css)$/,
           threshold: 10240,
-          deleteOriginalAssets: false
+          deleteOriginalAssets: false,
         }),
         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/),
         new LodashModuleReplacementPlugin(),
-        new webpack.DllReferencePlugin({
-          context: process.cwd(),
-          manifest: require('./public/vendor/vendor-manifest.json')
-        }),
-        // 将 dll 注入到 生成的 html 模板中
-        new AddAssetHtmlPlugin({
-          // dll文件位置
-          filepath: resolve('./public/vendor/*.js'),
-          // dll 引用路径
-          publicPath: './vendor',
-          // dll最终输出的目录
-          outputPath: './vendor'
-        })
-      ])
-    }
-    return {
-      plugins
+        new HardSourceWebpackPlugin()
+      ]
+      return {
+        plugins
+      }
     }
   },
   chainWebpack(config) {
     config.resolve.alias
       .set('lodash', 'lodash-es')
       .set('@ant-design/icons/lib/dist$', resolve('./src/plugins/icons.js'))
+      .set('@index', resolve('./src/pages/index'))
+      .set('@demo', resolve('./src/pages/demo'))
     // 防止多页面打包卡顿
     // config.plugins.delete('named-chunks')
     if (IS_PROD) {
@@ -71,7 +68,7 @@ module.exports = {
             maxInitialRequests: 5,
             minSize: 0,
             priority: 1,
-            reuseExistingChunk: true
+            reuseExistingChunk: true,
           },
           vendors: {
             name: 'chunk-vendors',
@@ -79,7 +76,7 @@ module.exports = {
             chunks: 'initial',
             priority: 2,
             reuseExistingChunk: true,
-            enforce: true
+            enforce: true,
           },
           antDesignVue: {
             name: 'chunk-ant-design-vue',
@@ -89,7 +86,18 @@ module.exports = {
             reuseExistingChunk: true,
             enforce: true
           }
-        }
+        },
+      })
+      config.output.filename((bundle) => {
+        return bundle.chunk.name === 'index'
+          ? 'js/[name].[contenthash:8].js'
+          : '[name]/[name].[contenthash:8].js'
+      })
+    } else {
+      config.output.filename((bundle) => {
+        return bundle.chunk.name === 'index'
+          ? 'js/[name].js'
+          : '[name]/[name].js'
       })
     }
     return config

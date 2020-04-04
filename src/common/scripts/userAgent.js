@@ -1,6 +1,6 @@
 export function isMobile() {
-  let info = navigator.userAgent
-  let agents = [
+  const info = navigator.userAgent
+  const agents = [
     'Android',
     'iPhone',
     'SymbianOS',

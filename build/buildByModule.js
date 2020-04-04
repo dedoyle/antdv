@@ -8,7 +8,7 @@ const inquirer = require('inquirer')
 const resolve = dir => path.resolve(__dirname, dir)
 
 const getModuleList = () => {
-  return glob.sync(resolve('../src/modules/*')).map(item => {
+  return glob.sync(resolve('../src/pages/*')).map(item => {
     return item.slice(item.lastIndexOf('/') + 1)
   })
 }
@@ -24,7 +24,7 @@ const askQuestions = () => {
     {
       name: 'MODULE_NAME',
       type: 'input',
-      default: 'framework',
+      default: 'index',
       message: '请问你想打包哪些模块（多个模块以英文逗号隔开）？'
     }
   ]
@@ -52,7 +52,7 @@ const main = async() => {
   let moduleName = await getModuleName()
 
   while (!moduleName) {
-    console.error('请输入 src/modules 下的目录名')
+    console.error('请输入 src/pages 下的目录名')
     moduleName = await getModuleName()
   }
 
