@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/modules/framework/store'
 import Layout from '@/components/common/layouts/Default/Layout.vue'
-import LoadData from '../views/LoadData.vue'
+import LoadData from '../views/LoadData/LoadData.vue'
 import onUnauthorized from '@/modules/framework/common/onUnauthorized.js'
 
 Vue.use(VueRouter)
@@ -21,7 +21,7 @@ const router = new VueRouter({
       path: '/login/:redirect?',
       name: 'Login',
       component: resolve =>
-        require(['../views/Login.vue'], resolve),
+        require(['../views/Login/Login.vue'], resolve),
       meta: {
         text: '登录'
       },
@@ -31,7 +31,7 @@ const router = new VueRouter({
       path: '/forget-pwd/:redirect?',
       name: 'ForgetPwd',
       component: resolve => {
-        return require(['../views/ForgetPwd.vue'], resolve)
+        return require(['../views/ForgetPwd/ForgetPwd.vue'], resolve)
       },
       props: true,
       meta: {
