@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const { generateEntries } = require('./mutiple-entry')
 
 const resolve = (dir) => path.resolve(__dirname, dir)
@@ -39,7 +39,7 @@ module.exports = {
         }),
         new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/),
         new LodashModuleReplacementPlugin(),
-        new HardSourceWebpackPlugin()
+        // new HardSourceWebpackPlugin()
       ]
       return {
         plugins
@@ -55,10 +55,14 @@ module.exports = {
     // 防止多页面打包卡顿
     // config.plugins.delete('named-chunks')
     if (IS_PROD) {
-      // 移除 prefetch 插件
-      config.plugins.delete('prefetch')
-      // 移除 preload 插件
-      config.plugins.delete('preload')
+      // // 移除 prefetch 插件
+      // config.plugins.delete('prefetch')
+      // // 移除 preload 插件
+      // config.plugins.delete('preload')
+      Object.keys(pages).forEach(entryName => {
+        // config.plugins.delete(`prefetch-${entryName}`)
+        config.plugins.delete(`preload-${entryName}`)
+      })
       config.optimization.splitChunks({
         cacheGroups: {
           common: {

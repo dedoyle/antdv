@@ -4,11 +4,10 @@ const glob = require('glob')
 const generateEntries = () => {
   // 默认查询多页面地址
   const PATH_ENTRY = path.resolve(__dirname, './src/pages')
-  // 约定构建出的页面用folder名字，默认入口为每个页面的main.js
+  // 约定构建出的页面用目录名，默认入口为每个页面的 main.js
   const entryFilePaths = glob.sync(PATH_ENTRY + '/**/main.js')
-  const entry = {}
 
-  entryFilePaths.forEach(filePath => {
+  return entryFilePaths.reduce((entry, filePath) => {
     const FILENAME = filePath.match(/([^/]+)\/main\.js$/)[1]
     entry[FILENAME] = {
       entry: filePath,
@@ -17,11 +16,9 @@ const generateEntries = () => {
         FILENAME === 'index'
           ? `${FILENAME}.html`
           : `${FILENAME}/index.html`,
-      chunks: ['chunk-vendors', 'chunk-common', FILENAME],
+      chunks: ['chunk-vendors', 'chunk-common', 'chunk-ant-design-vue', FILENAME],
     }
-  })
-
-  return entry
+  }, {})
 }
 
 module.exports = {

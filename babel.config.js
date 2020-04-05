@@ -3,8 +3,8 @@ const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 const plugins = [
   [
     'import',
-    { libraryName: 'ant-design-vue', libraryDirectory: 'es', style: true }
-  ]
+    { libraryName: 'ant-design-vue', libraryDirectory: 'es', style: true },
+  ],
 ]
 if (IS_PROD) {
   plugins.push('transform-remove-console')
@@ -18,9 +18,9 @@ module.exports = {
       '@babel/preset-env',
       {
         corejs: 3,
-        useBuiltIns: 'entry'
-      }
-    ]
+        useBuiltIns: 'entry',
+      },
+    ],
   ],
-  plugins
+  plugins,
 }
