@@ -2657,14 +2657,6 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npm.taobao.org/chalk/download/chalk-4.0.0.tgz?cache=0&sync_timestamp=1585815759944&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fchalk%2Fdownload%2Fchalk-4.0.0.tgz#6e98081ed2d17faab615eb52ac66ec1fe6209e72"
-  integrity sha1-bpgIHtLRf6q2FetSrGbsH+YgnnI=
-  dependencies:
-    ansi-styles "^4.1.0"
-    supports-color "^7.1.0"
-
 chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.npm.taobao.org/chardet/download/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
@@ -5412,25 +5404,6 @@ inquirer@^7.0.0:
   version "7.0.6"
   resolved "https://registry.npm.taobao.org/inquirer/download/inquirer-7.0.6.tgz?cache=0&sync_timestamp=1583328105956&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Finquirer%2Fdownload%2Finquirer-7.0.6.tgz#ee4ff0ea7ecda5324656fe665878790f66df7d0c"
   integrity sha1-7k/w6n7NpTJGVv5mWHh5D2bffQw=
-  dependencies:
-    ansi-escapes "^4.2.1"
-    chalk "^3.0.0"
-    cli-cursor "^3.1.0"
-    cli-width "^2.0.0"
-    external-editor "^3.0.3"
-    figures "^3.0.0"
-    lodash "^4.17.15"
-    mute-stream "0.0.8"
-    run-async "^2.4.0"
-    rxjs "^6.5.3"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-    through "^2.3.6"
-
-inquirer@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.npm.taobao.org/inquirer/download/inquirer-7.1.0.tgz#1298a01859883e17c7264b82870ae1034f92dd29"
-  integrity sha1-EpigGFmIPhfHJkuChwrhA0+S3Sk=
   dependencies:
     ansi-escapes "^4.2.1"
     chalk "^3.0.0"
