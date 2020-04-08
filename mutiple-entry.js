@@ -18,6 +18,7 @@ const generateEntries = () => {
           : `${FILENAME}/index.html`,
       chunks: ['chunk-vendors', 'chunk-common', 'chunk-ant-design-vue', FILENAME],
     }
+    return entry
   }, {})
 }
 
