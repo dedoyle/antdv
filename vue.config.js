@@ -23,9 +23,7 @@ const plugins = [
   new webpack.DllReferencePlugin({
     context: process.cwd(),
     manifest: require('./public/vendor/vendor-manifest.json')
-  }),
-  new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/),
-  new LodashModuleReplacementPlugin()
+  })
 ]
 
 // 开发插件这个有问题
@@ -66,7 +64,9 @@ module.exports = {
             test: /\.(js|html|json|css)$/,
             threshold: 10240,
             deleteOriginalAssets: false
-          })
+          }),
+          new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/),
+          new LodashModuleReplacementPlugin()
         ])
       }
     } else {
