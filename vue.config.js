@@ -8,46 +8,25 @@ const { generateEntries } = require('./mutiple-entry')
 const resolve = dir => path.resolve(__dirname, dir)
 const IS_PROD = process.env.NODE_ENV === 'production'
 const IS_DEV = process.env.NODE_ENV === 'development'
+
 const pageName = process.argv[3] || 'index'
-
-console.log(IS_DEV)
-console.log(pageName)
-
 const entries = generateEntries()
+
+if (IS_PROD) {
+  console.log('=======================')
+  console.log(`正在打包 ${pageName} 页面`)
+  console.log('=======================')
+}
+
+// 开发采用简单的多页面开发，发布采用分目录打包
 const pages = IS_DEV ? entries : { [pageName]: entries[pageName] }
-
-console.log(pages)
-
-const plugins = [
-  // dll插件加入
-  new webpack.DllReferencePlugin({
-    context: process.cwd(),
-    manifest: require('./public/vendor/vendor-manifest.json')
-  })
-]
-
-// 开发插件这个有问题
-const devPlugins = [
-  /**
-   * 缓存加速二次构建速度
-   */
-  new HardSourceWebpackPlugin(),
-  new HardSourceWebpackPlugin.ExcludeModulePlugin([
-    {
-      // HardSource works with mini-css-extract-plugin but due to how
-      // mini-css emits assets, assets are not emitted on repeated builds with
-      // mini-css and hard-source together. Ignoring the mini-css loader
-      // modules, but not the other css loader modules, excludes the modules
-      // that mini-css needs rebuilt to output assets every time.
-      test: /mini-css-extract-plugin[\\/]dist[\\/]loader/
-    }
-  ])
-]
+const outputDir = 'dist' + (IS_PROD ? `/${pageName}` : '')
 
 module.exports = {
   productionSourceMap: false,
+  publicPath: IS_DEV ? '/' : './',
   pages,
-  outputDir: IS_PROD ? `dist/${pageName}` : 'dist',
+  outputDir,
   css: {
     loaderOptions: {
       less: {
@@ -56,7 +35,32 @@ module.exports = {
     }
   },
   transpileDependencies: ['strip-ansi', 'ismobilejs'],
-  configureWebpack: config => {
+  configureWebpack() {
+    const plugins = [
+      // dll插件加入
+      new webpack.DllReferencePlugin({
+        context: process.cwd(),
+        manifest: require('./public/vendor/vendor-manifest.json')
+      })
+    ]
+
+    // 开发插件这个有问题
+    const devPlugins = [
+      /**
+       * 缓存加速二次构建速度
+       */
+      new HardSourceWebpackPlugin(),
+      new HardSourceWebpackPlugin.ExcludeModulePlugin([
+        {
+          // HardSource works with mini-css-extract-plugin but due to how
+          // mini-css emits assets, assets are not emitted on repeated builds with
+          // mini-css and hard-source together. Ignoring the mini-css loader
+          // modules, but not the other css loader modules, excludes the modules
+          // that mini-css needs rebuilt to output assets every time.
+          test: /mini-css-extract-plugin[\\/]dist[\\/]loader/
+        }
+      ])
+    ]
     if (IS_PROD) {
       return {
         plugins: plugins.concat([
@@ -89,7 +93,7 @@ module.exports = {
       // 移除 preload 插件
       Object.keys(pages).forEach(entryName => {
         config.plugins.delete(`prefetch-${entryName}`)
-        // config.plugins.delete(`preload-${entryName}`)
+        config.plugins.delete(`preload-${entryName}`)
       })
       config.optimization.splitChunks({
         maxAsyncRequests: 5, // 所有异步请求不得超过5个
@@ -122,8 +126,6 @@ module.exports = {
           }
         }
       })
-      // 默认配置多页面模式保证可扩展性
-      config.optimization.runtimeChunk('multiple')
     }
     return config
   }
