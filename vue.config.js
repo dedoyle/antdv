@@ -2,47 +2,76 @@ const path = require('path')
 const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const { generateEntries } = require('./mutiple-entry')
 
-const resolve = (dir) => path.resolve(__dirname, dir)
+const resolve = dir => path.resolve(__dirname, dir)
 const IS_PROD = process.env.NODE_ENV === 'production'
+const IS_DEV = process.env.NODE_ENV === 'development'
+const pageName = process.argv[3] || 'index'
 
-const pages = generateEntries()
+console.log(IS_DEV)
+console.log(pageName)
+
+const entries = generateEntries()
+const pages = IS_DEV ? entries : { [pageName]: entries[pageName] }
+
+console.log(pages)
+
+const plugins = [
+  // dll插件加入
+  new webpack.DllReferencePlugin({
+    context: process.cwd(),
+    manifest: require('./public/vendor/vendor-manifest.json')
+  }),
+  new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/),
+  new LodashModuleReplacementPlugin()
+]
+
+// 开发插件这个有问题
+const devPlugins = [
+  /**
+   * 缓存加速二次构建速度
+   */
+  new HardSourceWebpackPlugin(),
+  new HardSourceWebpackPlugin.ExcludeModulePlugin([
+    {
+      // HardSource works with mini-css-extract-plugin but due to how
+      // mini-css emits assets, assets are not emitted on repeated builds with
+      // mini-css and hard-source together. Ignoring the mini-css loader
+      // modules, but not the other css loader modules, excludes the modules
+      // that mini-css needs rebuilt to output assets every time.
+      test: /mini-css-extract-plugin[\\/]dist[\\/]loader/
+    }
+  ])
+]
 
 module.exports = {
   productionSourceMap: false,
   pages,
+  outputDir: IS_PROD ? `dist/${pageName}` : 'dist',
   css: {
     loaderOptions: {
       less: {
-        javascriptEnabled: true,
-      },
-    },
-    extract: IS_PROD && {
-      moduleFilename: ({ name }) => {
-        return name === 'index'
-          ? 'css/[name].[contenthash:8].css'
-          : '[name]/[name].[contenthash:8].css'
-      },
-      chunkFilename: 'css/[name].[contenthash:8].css',
-    },
+        javascriptEnabled: true
+      }
+    }
   },
   transpileDependencies: ['strip-ansi', 'ismobilejs'],
   configureWebpack: config => {
     if (IS_PROD) {
-      const plugins = [
-        new CompressionPlugin({
-          test: /\.(js|html|json|css)$/,
-          threshold: 10240,
-          deleteOriginalAssets: false,
-        }),
-        new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/),
-        new LodashModuleReplacementPlugin(),
-        // new HardSourceWebpackPlugin()
-      ]
       return {
-        plugins
+        plugins: plugins.concat([
+          new CompressionPlugin({
+            test: /\.(js|html|json|css)$/,
+            threshold: 10240,
+            deleteOriginalAssets: false
+          })
+        ])
+      }
+    } else {
+      return {
+        plugins: plugins.concat(devPlugins)
       }
     }
   },
@@ -50,20 +79,21 @@ module.exports = {
     config.resolve.alias
       .set('lodash', 'lodash-es')
       .set('@ant-design/icons/lib/dist$', resolve('./src/plugins/icons.js'))
-      .set('@index', resolve('./src/pages/index'))
-      .set('@demo', resolve('./src/pages/demo'))
+
+    Object.keys(entries).forEach(page => {
+      config.resolve.alias.set(`@${page}`, resolve(`./src/pages/${page}`))
+    })
     // 防止多页面打包卡顿
     // config.plugins.delete('named-chunks')
     if (IS_PROD) {
-      // // 移除 prefetch 插件
-      // config.plugins.delete('prefetch')
-      // // 移除 preload 插件
-      // config.plugins.delete('preload')
+      // 移除 preload 插件
       Object.keys(pages).forEach(entryName => {
-        // config.plugins.delete(`prefetch-${entryName}`)
-        config.plugins.delete(`preload-${entryName}`)
+        config.plugins.delete(`prefetch-${entryName}`)
+        // config.plugins.delete(`preload-${entryName}`)
       })
       config.optimization.splitChunks({
+        maxAsyncRequests: 5, // 所有异步请求不得超过5个
+        maxInitialRequests: 3,
         cacheGroups: {
           common: {
             name: 'chunk-common',
@@ -72,7 +102,7 @@ module.exports = {
             maxInitialRequests: 5,
             minSize: 0,
             priority: 1,
-            reuseExistingChunk: true,
+            reuseExistingChunk: true
           },
           vendors: {
             name: 'chunk-vendors',
@@ -80,7 +110,7 @@ module.exports = {
             chunks: 'initial',
             priority: 2,
             reuseExistingChunk: true,
-            enforce: true,
+            enforce: true
           },
           antDesignVue: {
             name: 'chunk-ant-design-vue',
@@ -90,20 +120,11 @@ module.exports = {
             reuseExistingChunk: true,
             enforce: true
           }
-        },
+        }
       })
-      config.output.filename((bundle) => {
-        return bundle.chunk.name === 'index'
-          ? 'js/[name].[contenthash:8].js'
-          : '[name]/[name].[contenthash:8].js'
-      })
-    } else {
-      config.output.filename((bundle) => {
-        return bundle.chunk.name === 'index'
-          ? 'js/[name].js'
-          : '[name]/[name].js'
-      })
+      // 默认配置多页面模式保证可扩展性
+      config.optimization.runtimeChunk('multiple')
     }
     return config
-  },
+  }
 }
